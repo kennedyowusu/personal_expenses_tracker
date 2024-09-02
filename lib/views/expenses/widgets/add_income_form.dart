@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_expenses_tracker/common/custom_border_button.dart';
+import 'package:personal_expenses_tracker/widgets/custom_border_button.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/providers/income_provider.dart';
 import 'package:personal_expenses_tracker/model/income_model.dart';

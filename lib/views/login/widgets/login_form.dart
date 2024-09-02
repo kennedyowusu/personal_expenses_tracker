@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_expenses_tracker/common/custom_button.dart';
-import 'package:personal_expenses_tracker/common/input_error.dart';
-import 'package:personal_expenses_tracker/common/password_input_field.dart';
+import 'package:personal_expenses_tracker/widgets/custom_button.dart';
+import 'package:personal_expenses_tracker/widgets/input_error.dart';
+import 'package:personal_expenses_tracker/widgets/password_input_field.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/helper/validation.dart';
 import 'package:personal_expenses_tracker/views/forget_password/forget_password_screen.dart';

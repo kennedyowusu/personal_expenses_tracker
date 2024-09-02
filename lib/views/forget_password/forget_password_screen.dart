@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_tracker/common/auth_header.dart';
+import 'package:personal_expenses_tracker/widgets/auth_header.dart';
 import 'package:personal_expenses_tracker/views/forget_password/widget/forget_password_form.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {

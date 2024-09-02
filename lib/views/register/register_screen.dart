@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_tracker/common/auth_header.dart';
-import 'package:personal_expenses_tracker/common/auth_prompt_text.dart';
+import 'package:personal_expenses_tracker/widgets/auth_header.dart';
+import 'package:personal_expenses_tracker/widgets/auth_prompt_text.dart';
 import 'package:personal_expenses_tracker/views/login/login_screen.dart';
 import 'package:personal_expenses_tracker/views/register/widgets/register_form.dart';
 

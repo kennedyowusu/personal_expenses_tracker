@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_expenses_tracker/common/custom_button.dart';
-import 'package:personal_expenses_tracker/common/custom_snackbar.dart';
+import 'package:personal_expenses_tracker/widgets/custom_button.dart';
+import 'package:personal_expenses_tracker/widgets/custom_snackbar.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/helper/validation.dart';
 

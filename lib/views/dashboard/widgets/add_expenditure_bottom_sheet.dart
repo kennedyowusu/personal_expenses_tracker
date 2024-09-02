@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_tracker/common/custom_border_button.dart';
+import 'package:personal_expenses_tracker/widgets/custom_border_button.dart';
 
 class AddExpenditureBottomSheet extends StatelessWidget {
   final TextEditingController categoryController = TextEditingController();

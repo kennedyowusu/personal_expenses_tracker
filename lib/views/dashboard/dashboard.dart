@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_expenses_tracker/common/custom_app_bar.dart';
-import 'package:personal_expenses_tracker/common/custom_button.dart';
-import 'package:personal_expenses_tracker/common/dialogs/add_expenditure_modal_sheet.dart';
+import 'package:personal_expenses_tracker/widgets/custom_app_bar.dart';
+import 'package:personal_expenses_tracker/widgets/custom_button.dart';
+import 'package:personal_expenses_tracker/widgets/dialogs/add_expenditure_modal_sheet.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/model/income_expense_model.dart';
 import 'package:personal_expenses_tracker/providers/income_provider.dart';
