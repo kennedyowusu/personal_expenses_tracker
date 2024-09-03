@@ -101,7 +101,7 @@ void showAddExpenditureSheet(
               },
             ),
             const SizedBox(height: 16),
-            ExpenseTrackerCustomButton(
+            PrimaryButton(
               text: 'Save Expenditure',
               backgroundColor: Colors.white,
               labelColor: secondaryColor,
@@ -179,7 +179,7 @@ void _showCategorySelectionSheet(
                 separatorBuilder: (context, index) => const Divider(),
               ),
             ),
-            ExpenseTrackerCustomButton(
+            PrimaryButton(
               backgroundColor: Colors.white,
               labelColor: secondaryColor,
               text: 'Add Category',

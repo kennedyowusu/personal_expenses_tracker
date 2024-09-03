@@ -74,7 +74,7 @@ class LoginForm extends ConsumerWidget {
             ),
           ),
           const SizedBox(height: 8),
-          ExpenseTrackerCustomButton(
+          PrimaryButton(
             text: "Login",
             isLoading: ref.watch(loginWithEmailProvider).isLoading,
             onPressed: () async {

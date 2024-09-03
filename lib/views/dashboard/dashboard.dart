@@ -94,7 +94,7 @@ class _DashboardState extends ConsumerState<Dashboard>
                       ),
                     ),
                     const SizedBox(height: 16),
-                    ExpenseTrackerCustomButton(
+                    PrimaryButton(
                       backgroundColor: primaryColor,
                       text: 'Add Expenditure',
                       onPressed: () {

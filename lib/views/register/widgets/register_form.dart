@@ -107,7 +107,7 @@ class RegisterFormState extends ConsumerState<RegisterForm> {
             errorText: ref.watch(registerWithEmailProvider).errorMessage,
           ),
           const SizedBox(height: 16),
-          ExpenseTrackerCustomButton(
+          PrimaryButton(
             text: "Next",
             isLoading: ref.watch(registerWithEmailProvider).isLoading,
             onPressed: () async {

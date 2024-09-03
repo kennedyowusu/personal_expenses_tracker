@@ -135,7 +135,7 @@ Future<void> showAddIncomeModalSheet({
             const SizedBox(height: 16),
             Consumer(
               builder: (context, watchRef, child) {
-                return ExpenseTrackerCustomButton(
+                return PrimaryButton(
                   text: 'Add Income',
                   isLoading: watchRef.watch(incomeProvider).isLoading,
                   isOutlined: true,

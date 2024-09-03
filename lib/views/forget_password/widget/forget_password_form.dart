@@ -38,7 +38,7 @@ class ForgotPasswordFormState extends ConsumerState<ForgotPasswordForm> {
             validator: validateEmail,
           ),
           const SizedBox(height: 16),
-          ExpenseTrackerCustomButton(
+          PrimaryButton(
             backgroundColor: primaryColor,
             onPressed: () {
               if (forgotPasswordFormKey.currentState?.validate() == true) {

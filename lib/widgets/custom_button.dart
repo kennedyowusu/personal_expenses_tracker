@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 
-class ExpenseTrackerCustomButton extends StatelessWidget {
+class PrimaryButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
   final double height;
@@ -12,7 +12,7 @@ class ExpenseTrackerCustomButton extends StatelessWidget {
   final bool isOutlined;
   final Color labelColor;
 
-  const ExpenseTrackerCustomButton({
+  const PrimaryButton({
     super.key,
     required this.onPressed,
     required this.text,
