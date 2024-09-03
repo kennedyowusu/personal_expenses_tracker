@@ -176,56 +176,36 @@ class _DashboardState extends ConsumerState<Dashboard>
                         itemBuilder: (context, index) {
                           final Income income =
                               ref.watch(incomeProvider).incomes[index];
-                          return Dismissible(
-                            key: Key(income.id ?? ""),
-                            direction: DismissDirection.endToStart,
-                            dismissThresholds: const {
-                              DismissDirection.endToStart: 0.5,
-                            },
-                            background: Container(
-                              color: Colors.red,
-                              alignment: Alignment.centerRight,
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
-                              child:
-                                  const Icon(Icons.delete, color: Colors.white),
+                          return Card(
+                            elevation: 1,
+                            margin: const EdgeInsets.all(8),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
                             ),
-                            onDismissed: (direction) async {
-                              await deleteIncome(
-                                income: income,
-                              );
-                            },
-                            child: Card(
-                              elevation: 1,
-                              margin: const EdgeInsets.all(8),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12),
+                            color: Colors.white,
+                            child: ListTile(
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
+                              leading: const CircleAvatar(
+                                backgroundColor: primaryColor,
+                                child: Icon(
+                                  Icons.attach_money,
+                                  color: Colors.white,
+                                ),
                               ),
-                              color: Colors.white,
-                              child: ListTile(
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
-                                leading: const CircleAvatar(
-                                  backgroundColor: primaryColor,
-                                  child: Icon(
-                                    Icons.attach_money,
-                                    color: Colors.white,
-                                  ),
+                              title: Text(
+                                income.nameOfRevenue ?? "-",
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
                                 ),
-                                title: Text(
-                                  income.nameOfRevenue ?? "-",
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                trailing: Text(
-                                  'GHS ${income.amount?.toStringAsFixed(2)}',
-                                  style: const TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: primaryColor,
-                                  ),
+                              ),
+                              trailing: Text(
+                                'GHS ${income.amount?.toStringAsFixed(2)}',
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                  color: primaryColor,
                                 ),
                               ),
                             ),
