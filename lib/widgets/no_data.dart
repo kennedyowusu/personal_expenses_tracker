@@ -4,9 +4,9 @@ import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/constants/images.dart';
 
 class NoDataWidget extends StatelessWidget {
-  const NoDataWidget({super.key, required this.message});
+  const NoDataWidget({super.key, required this.title, required this.message});
 
-  final String message;
+  final String title, message;
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +16,25 @@ class NoDataWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Text(
-            'No data found',
-            style: TextStyle(
+          SvgPicture.asset(empty, height: 200, width: 200),
+          const SizedBox(height: 32),
+          Text(
+            title,
+            style: const TextStyle(
               fontSize: 18,
+              color: textColor,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 4),
+          Text(
+            message,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
               color: textColor,
             ),
           ),
-          const SizedBox(height: 16),
-          SvgPicture.asset(empty, height: 200, width: 200),
         ],
       ),
     );
