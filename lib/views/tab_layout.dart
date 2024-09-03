@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/views/dashboard/dashboard.dart';
-import 'package:personal_expenses_tracker/views/expenses/expenses.dart';
+import 'package:personal_expenses_tracker/views/expenses/expenditure_screen.dart';
 import 'package:personal_expenses_tracker/views/settings/settings_screen.dart';
 
 class TabLayout extends StatefulWidget {
@@ -18,7 +18,7 @@ class _TabLayoutState extends State<TabLayout> {
 
   final List<Widget> _screens = [
     const Dashboard(),
-    const Expenses(),
+    const ExpenditureScreen(),
     const SettingsScreen(),
   ];
 

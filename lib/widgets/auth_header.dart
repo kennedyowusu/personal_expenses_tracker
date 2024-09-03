@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 class AuthHeaderText extends StatelessWidget {
-  const AuthHeaderText(
-      {super.key, required this.headerText, required this.subHeaderText});
+  const AuthHeaderText({
+    super.key,
+    required this.headerText,
+    required this.subHeaderText,
+  });
 
   final String headerText, subHeaderText;
 

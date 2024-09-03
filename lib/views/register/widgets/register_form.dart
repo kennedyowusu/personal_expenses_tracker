@@ -127,7 +127,7 @@ class RegisterFormState extends ConsumerState<RegisterForm> {
                 if (context.mounted) {
                   Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
-                      builder: (context) => TabLayout(),
+                      builder: (context) => const TabLayout(),
                     ),
                     (route) => false,
                   );

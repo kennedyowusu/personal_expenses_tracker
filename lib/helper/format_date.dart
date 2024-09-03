@@ -11,7 +11,7 @@ String getMonthName(int monthNumber) {
     'Sept',
     'Oct',
     'Nov',
-    'Dec'
+    'Dec',
   ];
   return months[monthNumber - 1];
 }

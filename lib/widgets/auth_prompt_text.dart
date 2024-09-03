@@ -24,7 +24,9 @@ class AuthPromptText extends StatelessWidget {
           TextSpan(
             text: actionText,
             style: const TextStyle(
-                color: primaryColor, fontWeight: FontWeight.bold),
+              color: primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
             recognizer: TapGestureRecognizer()..onTap = onActionTap,
           ),
         ],

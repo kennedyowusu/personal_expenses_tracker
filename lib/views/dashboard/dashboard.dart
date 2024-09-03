@@ -20,10 +20,6 @@ class _DashboardState extends ConsumerState<Dashboard>
     with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
-  final TextEditingController amountController = TextEditingController();
-  final TextEditingController categoryController = TextEditingController();
-  final TextEditingController nameController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
@@ -33,9 +29,6 @@ class _DashboardState extends ConsumerState<Dashboard>
   @override
   void dispose() {
     _tabController.dispose();
-    amountController.dispose();
-    categoryController.dispose();
-    nameController.dispose();
     super.dispose();
   }
 
@@ -99,10 +92,8 @@ class _DashboardState extends ConsumerState<Dashboard>
                       text: 'Add Expenditure',
                       onPressed: () {
                         showAddExpenditureSheet(
-                          context,
-                          amountController,
-                          categoryController,
-                          nameController,
+                          context: context,
+                          ref: ref,
                         );
                       },
                     ),

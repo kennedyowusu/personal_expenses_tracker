@@ -38,7 +38,7 @@ class SettingsScreen extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 8),
-              ExpenseTrackerCustomButton(
+              PrimaryButton(
                 onPressed: () {},
                 text: 'Edit Profile',
                 backgroundColor: primaryColor,
@@ -65,8 +65,11 @@ class SettingsScreen extends ConsumerWidget {
                 onTap: () {},
               ),
               const Spacer(),
-              ExpenseTrackerCustomButton(
+              PrimaryButton(
+                text: 'Logout',
+                backgroundColor: Colors.white,
                 labelColor: Colors.red,
+                isOutlined: true,
                 onPressed: () async {
                   await LadderSecureStorage().deleteAccessToken();
 
@@ -79,8 +82,6 @@ class SettingsScreen extends ConsumerWidget {
                     );
                   }
                 },
-                text: 'Logout',
-                backgroundColor: Colors.white,
               ),
               const SizedBox(height: 8),
             ],
