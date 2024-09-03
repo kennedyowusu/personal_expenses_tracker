@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
+import 'package:personal_expenses_tracker/providers/expenditure_provider.dart';
+import 'package:personal_expenses_tracker/providers/income_provider.dart';
 import 'package:personal_expenses_tracker/views/dashboard/dashboard.dart';
 import 'package:personal_expenses_tracker/views/expenses/expenditure_screen.dart';
 import 'package:personal_expenses_tracker/views/settings/settings_screen.dart';
 
-class TabLayout extends StatefulWidget {
+class TabLayout extends ConsumerStatefulWidget {
   const TabLayout({super.key, this.selectedIndex = 0});
 
   final int selectedIndex;
 
   @override
-  State<TabLayout> createState() => _TabLayoutState();
+  ConsumerState<TabLayout> createState() => _TabLayoutState();
 }
 
-class _TabLayoutState extends State<TabLayout> {
+class _TabLayoutState extends ConsumerState<TabLayout> {
   int _selectedIndex = 0;
 
   final List<Widget> _screens = [
@@ -28,9 +31,35 @@ class _TabLayoutState extends State<TabLayout> {
     });
   }
 
+  Future<void> getExpenditures() async {
+    final (_, err) = await ref.read(expendituresProvider).getExpenditures();
+    if (err != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(err.message),
+        ),
+      );
+    }
+  }
+
+  Future<void> getIncomes() async {
+    final (_, err) = await ref.read(incomeProvider).getIncomes();
+    if (err != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(err.message),
+        ),
+      );
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await getExpenditures();
+      await getIncomes();
+    });
     _selectedIndex = widget.selectedIndex;
   }
 

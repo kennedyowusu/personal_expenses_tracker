@@ -17,8 +17,7 @@ class InfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
-      width: 150,
+      width: 160,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -30,15 +29,17 @@ class InfoCard extends StatelessWidget {
       ),
       child: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
                 CircleAvatar(
+                  radius: 15,
                   backgroundColor: Colors.grey.shade100,
                   child: Icon(
                     icon,
                     color: iconColor,
+                    size: 15,
                   ),
                 ),
                 const SizedBox(width: 10),
@@ -51,6 +52,7 @@ class InfoCard extends StatelessWidget {
                 ),
               ],
             ),
+            const SizedBox(height: 10),
             Text(
               'GHS ${value.toStringAsFixed(2)}',
               style: const TextStyle(

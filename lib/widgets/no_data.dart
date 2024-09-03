@@ -16,7 +16,7 @@ class NoDataWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SvgPicture.asset(empty, height: 200, width: 200),
+          SvgPicture.asset(empty, height: 100, width: 100),
           const SizedBox(height: 32),
           Text(
             title,
