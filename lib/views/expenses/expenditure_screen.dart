@@ -85,14 +85,14 @@ class _ExpenditureScreenState extends ConsumerState<ExpenditureScreen> {
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: ListView.builder(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   itemCount: expensesByCategory.length,
                   itemBuilder: (context, index) {
                     final category = expensesByCategory.keys.elementAt(index);
                     final categoryExpenditures = expensesByCategory[category]!;
 
                     return Container(
-                      margin: EdgeInsets.only(bottom: 8.0),
+                      margin: const EdgeInsets.only(bottom: 8.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(8.0),

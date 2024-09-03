@@ -180,7 +180,7 @@ class _DashboardState extends ConsumerState<Dashboard>
                             key: Key(income.id ?? ""),
                             direction: DismissDirection.endToStart,
                             dismissThresholds: const {
-                              DismissDirection.endToStart: 0.5
+                              DismissDirection.endToStart: 0.5,
                             },
                             background: Container(
                               color: Colors.red,
@@ -207,8 +207,10 @@ class _DashboardState extends ConsumerState<Dashboard>
                                     const EdgeInsets.symmetric(horizontal: 16),
                                 leading: const CircleAvatar(
                                   backgroundColor: primaryColor,
-                                  child: Icon(Icons.attach_money,
-                                      color: Colors.white),
+                                  child: Icon(
+                                    Icons.attach_money,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 title: Text(
                                   income.nameOfRevenue ?? "-",
