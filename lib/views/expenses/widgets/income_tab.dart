@@ -77,7 +77,10 @@ class _IncomeTabState extends ConsumerState<IncomeTab> {
       ),
       body: incomes.isEmpty
           ? const Center(
-              child: NoDataWidget(message: 'No Income added yet.'),
+              child: NoDataWidget(
+                title: 'No Income Added Yet',
+                message: 'Click the add button below to add an income',
+              ),
             )
           : ListView.builder(
               itemCount: incomes.length,
