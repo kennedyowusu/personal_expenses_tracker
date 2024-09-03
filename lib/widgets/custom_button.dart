@@ -7,9 +7,10 @@ class ExpenseTrackerCustomButton extends StatelessWidget {
   final double height;
   final double width;
   final Color backgroundColor;
-  final TextStyle textStyle;
   final BorderRadiusGeometry borderRadius;
   final bool isLoading;
+  final bool isOutlined;
+  final Color labelColor;
 
   const ExpenseTrackerCustomButton({
     super.key,
@@ -18,13 +19,10 @@ class ExpenseTrackerCustomButton extends StatelessWidget {
     this.height = 50.0,
     this.width = double.infinity,
     this.backgroundColor = primaryColor,
-    this.textStyle = const TextStyle(
-      color: Colors.white,
-      fontSize: 16.0,
-      fontWeight: FontWeight.bold,
-    ),
     this.borderRadius = const BorderRadius.all(Radius.circular(8.0)),
     this.isLoading = false,
+    this.isOutlined = false,
+    this.labelColor = Colors.white,
   });
 
   @override
@@ -33,9 +31,9 @@ class ExpenseTrackerCustomButton extends StatelessWidget {
       height: height,
       width: width,
       child: isLoading
-          ? const Center(
+          ? Center(
               child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                valueColor: AlwaysStoppedAnimation<Color>(labelColor),
               ),
             )
           : ElevatedButton(
@@ -43,12 +41,22 @@ class ExpenseTrackerCustomButton extends StatelessWidget {
                 backgroundColor: backgroundColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: borderRadius,
+                  side: isOutlined
+                      ? BorderSide(
+                          color: labelColor,
+                          width: 1,
+                        )
+                      : BorderSide.none,
                 ),
               ),
               onPressed: onPressed,
               child: Text(
                 text,
-                style: textStyle,
+                style: TextStyle(
+                  color: labelColor,
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
     );

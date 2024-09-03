@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:personal_expenses_tracker/widgets/custom_app_bar.dart';
-import 'package:personal_expenses_tracker/widgets/custom_border_button.dart';
 import 'package:personal_expenses_tracker/widgets/custom_button.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
 import 'package:personal_expenses_tracker/constants/images.dart';
@@ -66,9 +65,8 @@ class SettingsScreen extends ConsumerWidget {
                 onTap: () {},
               ),
               const Spacer(),
-              CustomExpenseTrackerBorderButton(
-                textColor: Colors.red,
-                borderColor: Colors.red,
+              ExpenseTrackerCustomButton(
+                labelColor: Colors.red,
                 onPressed: () async {
                   await LadderSecureStorage().deleteAccessToken();
 

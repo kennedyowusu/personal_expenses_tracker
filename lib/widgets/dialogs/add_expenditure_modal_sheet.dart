@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:personal_expenses_tracker/widgets/custom_border_button.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
+import 'package:personal_expenses_tracker/widgets/custom_button.dart';
 
 void showAddExpenditureSheet(
   BuildContext context,
@@ -33,9 +33,9 @@ void showAddExpenditureSheet(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 8),
-            Text(
-              'Add Expenditure'.toUpperCase(),
-              style: const TextStyle(
+            const Text(
+              'ADD EXPENDITURE',
+              style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
@@ -101,11 +101,11 @@ void showAddExpenditureSheet(
               },
             ),
             const SizedBox(height: 16),
-            CustomExpenseTrackerBorderButton(
+            ExpenseTrackerCustomButton(
               text: 'Save Expenditure',
               backgroundColor: Colors.white,
-              borderColor: secondaryColor,
-              textColor: secondaryColor,
+              labelColor: secondaryColor,
+              isOutlined: true,
               onPressed: () {
                 // Add your logic for saving expenditure
               },
@@ -119,7 +119,9 @@ void showAddExpenditureSheet(
 }
 
 void _showCategorySelectionSheet(
-    BuildContext context, TextEditingController categoryController) {
+  BuildContext context,
+  TextEditingController categoryController,
+) {
   final List<String> categories = [
     'Food',
     'Transport',
@@ -177,10 +179,9 @@ void _showCategorySelectionSheet(
                 separatorBuilder: (context, index) => const Divider(),
               ),
             ),
-            CustomExpenseTrackerBorderButton(
+            ExpenseTrackerCustomButton(
               backgroundColor: Colors.white,
-              borderColor: secondaryColor,
-              textColor: secondaryColor,
+              labelColor: secondaryColor,
               text: 'Add Category',
               onPressed: () {
                 // Add your logic for adding a new category

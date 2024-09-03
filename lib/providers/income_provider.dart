@@ -1,59 +1,77 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:personal_expenses_tracker/model/income_model.dart';
+import 'package:personal_expenses_tracker/repositories/income_repo.dart';
+import 'package:personal_expenses_tracker/repositories/models/api_response_model.dart';
+import 'package:personal_expenses_tracker/repositories/models/income_list_res.dart';
 
-final incomeProvider =
-    StateNotifierProvider<IncomeNotifier, List<Income>>((ref) {
-  return IncomeNotifier();
-});
+class IncomeChangeNotifier extends ChangeNotifier {
+  final IncomeRepo repo;
 
-class IncomeNotifier extends StateNotifier<List<Income>> {
-  final String _incomeKey = 'user_income';
+  IncomeChangeNotifier({
+    required this.repo,
+  });
 
-  IncomeNotifier() : super([]) {
-    _loadIncome();
+  bool isLoading = false;
+  String isFetchingErrorMessage = '';
+  List<Income> incomes = [];
+
+  Future<(ApiSuccess<IncomeListRes>? res, ApiError? err)> getIncomes() async {
+    isLoading = true;
+    isFetchingErrorMessage = '';
+    notifyListeners();
+
+    final (res, err) = await repo.getIncomeList();
+
+    isLoading = false;
+    if (res?.data != null) {
+      incomes = res?.data.data ?? [];
+    }
+
+    if (err != null) {
+      isFetchingErrorMessage = err.message;
+    }
+    notifyListeners();
+
+    return (res, err);
   }
 
-  // Load income data from local storage
-  void _loadIncome() {
-    // final incomeData = _storage.read<List<dynamic>>(_incomeKey) ?? [];
-    // state = incomeData
-    //     .map((json) => Income.fromJson(Map<String, dynamic>.from(json)))
-    //     .toList();
+  Future<(ApiSuccess<void>? res, ApiError? err)> addIncome({
+    required String nameOfRevenue,
+    required num amount,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+
+    final (res, err) = await repo.addIncome(
+      nameOfRevenue: nameOfRevenue,
+      amount: amount,
+    );
+
+    isLoading = false;
+    notifyListeners();
+
+    return (res, err);
   }
 
-  // Save income data to local storage
-  void _saveIncome() {
-    // final incomeData = state.map((income) => income.toJson()).toList();
-    // _storage.write(_incomeKey, incomeData);
-  }
+  Future<(ApiSuccess<void>? res, ApiError? err)> deleteIncome({
+    required String incomeId,
+  }) async {
+    isLoading = true;
+    notifyListeners();
 
-  void addIncome(Income income) {
-    state = [...state, income];
-    _saveIncome();
-  }
+    final (res, err) = await repo.deleteIncome(
+      incomeId: incomeId,
+    );
 
-  void deleteIncome(Income income) {
-    state = state.where((element) => element.id != income.id).toList();
-    _saveIncome();
-  }
+    isLoading = false;
+    notifyListeners();
 
-  void updateIncome(Income updatedIncome) {
-    state = state.map((income) {
-      if (income.id == updatedIncome.id) {
-        return updatedIncome;
-      }
-      return income;
-    }).toList();
-    _saveIncome();
-  }
-
-  void deleteAllIncomes() {
-    state = [];
-    _saveIncome();
-  }
-
-  double get totalIncome {
-    return state.fold(
-        0.0, (previousValue, element) => previousValue + element.amount);
+    return (res, err);
   }
 }
+
+final incomeProvider = ChangeNotifierProvider<IncomeChangeNotifier>((ref) {
+  return IncomeChangeNotifier(
+    repo: IncomeRepo(),
+  );
+});

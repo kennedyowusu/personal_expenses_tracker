@@ -32,8 +32,8 @@ class APIService {
     required String url,
     Map<String, dynamic>? body,
   }) async {
-    String authToken = await LadderSecureStorage().getAccessToken();
-    bool isAuth = authToken.isNotEmpty;
+    String accessToken = await LadderSecureStorage().getAccessToken();
+    bool isAuth = accessToken.isNotEmpty;
 
     final response = await http.post(
       Uri.parse(baseUrl + url),
@@ -41,7 +41,7 @@ class APIService {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        if (isAuth) 'Authorization': 'Token $authToken',
+        if (isAuth) 'Authorization': accessToken,
       },
     );
 
@@ -54,8 +54,8 @@ class APIService {
     required String url,
     Map<String, dynamic>? body,
   }) async {
-    String authToken = await LadderSecureStorage().getAccessToken();
-    bool isAuth = authToken.isNotEmpty;
+    String accessToken = await LadderSecureStorage().getAccessToken();
+    bool isAuth = accessToken.isNotEmpty;
 
     final response = await http.patch(
       Uri.parse(baseUrl + url),
@@ -63,7 +63,7 @@ class APIService {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        if (isAuth) 'Authorization': 'Token $authToken',
+        if (isAuth) 'Authorization': accessToken,
       },
     );
 
@@ -76,8 +76,8 @@ class APIService {
     required String url,
     Map<String, dynamic>? body,
   }) async {
-    String authToken = await LadderSecureStorage().getAccessToken();
-    bool isAuth = authToken.isNotEmpty;
+    String accessToken = await LadderSecureStorage().getAccessToken();
+    bool isAuth = accessToken.isNotEmpty;
 
     final response = await http.put(
       Uri.parse(baseUrl + url),
@@ -85,7 +85,7 @@ class APIService {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        if (isAuth) 'Authorization': 'Token $authToken',
+        if (isAuth) 'Authorization': accessToken,
       },
     );
 
@@ -97,15 +97,15 @@ class APIService {
   static Future<Response> delete({
     required String url,
   }) async {
-    String authToken = await LadderSecureStorage().getAccessToken();
-    bool isAuth = authToken.isNotEmpty;
+    String accessToken = await LadderSecureStorage().getAccessToken();
+    bool isAuth = accessToken.isNotEmpty;
 
     final response = await http.delete(
       Uri.parse(baseUrl + url),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        if (isAuth) 'Authorization': 'Token $authToken',
+        if (isAuth) 'Authorization': accessToken,
       },
     );
 
@@ -118,15 +118,15 @@ class APIService {
     required String url,
     Map<String, dynamic>? queryParameters,
   }) async {
-    String authToken = await LadderSecureStorage().getAccessToken();
-    bool isAuth = authToken.isNotEmpty;
+    String accessToken = await LadderSecureStorage().getAccessToken();
+    bool isAuth = accessToken.isNotEmpty;
 
     final response = await http.get(
       Uri.parse(baseUrl + url).replace(queryParameters: queryParameters),
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        if (isAuth) 'Authorization': 'Token $authToken',
+        if (isAuth) 'Authorization': accessToken,
       },
     );
 

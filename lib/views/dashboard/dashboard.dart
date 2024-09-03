@@ -41,13 +41,16 @@ class _DashboardState extends ConsumerState<Dashboard>
 
   @override
   Widget build(BuildContext context) {
-    final totalIncome = ref.watch(incomeProvider.notifier).totalIncome;
+    final totalIncome = ref.watch(incomeProvider).incomes.fold(
+          0.00,
+          (previousValue, element) => previousValue + (element.amount ?? 0),
+        );
 
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: const CustomAppBar(
-          title: 'Dasboard',
+          title: 'Dashboard',
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),

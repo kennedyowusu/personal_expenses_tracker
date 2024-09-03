@@ -1,19 +1,61 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:personal_expenses_tracker/repositories/models/income_list_res.dart';
 import 'package:personal_expenses_tracker/widgets/dialogs/add_income_modal_sheet.dart';
-import 'package:personal_expenses_tracker/widgets/dialogs/edit_income_dialog.dart';
 import 'package:personal_expenses_tracker/widgets/no_data.dart';
 import 'package:personal_expenses_tracker/constants/colors.dart';
-import 'package:personal_expenses_tracker/helper/format_date.dart';
-import 'package:personal_expenses_tracker/model/income_model.dart';
 import 'package:personal_expenses_tracker/providers/income_provider.dart';
 
-class IncomeTab extends ConsumerWidget {
+class IncomeTab extends ConsumerStatefulWidget {
   const IncomeTab({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final income = ref.watch(incomeProvider);
+  ConsumerState<IncomeTab> createState() => _IncomeTabState();
+}
+
+class _IncomeTabState extends ConsumerState<IncomeTab> {
+  Future<void> getIncomes() async {
+    final (_, err) = await ref.read(incomeProvider).getIncomes();
+    if (err != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(err.message),
+        ),
+      );
+    }
+  }
+
+  Future<void> deleteIncome({
+    required Income income,
+  }) async {
+    final (res, err) = await ref.read(incomeProvider).deleteIncome(
+          incomeId: income.id ?? "",
+        );
+
+    Navigator.pop(context);
+
+    if (err != null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(err.message),
+        ),
+      );
+    }
+
+    if (res?.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('${income.nameOfRevenue} removed'),
+        ),
+      );
+
+      getIncomes();
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final incomes = ref.watch(incomeProvider).incomes;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -26,20 +68,23 @@ class IncomeTab extends ConsumerWidget {
           ),
         ),
         onPressed: () {
-          showAddIncomeModalSheet(context);
+          showAddIncomeModalSheet(
+            context: context,
+            ref: ref,
+          );
         },
         child: const Icon(Icons.add_circle_outline_sharp, color: Colors.white),
       ),
-      body: income.isEmpty
+      body: incomes.isEmpty
           ? const Center(
               child: NoDataWidget(message: 'No Income added yet.'),
             )
           : ListView.builder(
-              itemCount: income.length,
+              itemCount: incomes.length,
               itemBuilder: (context, index) {
-                final Income inc = income[index];
+                final Income income = incomes[index];
                 return Dismissible(
-                  key: Key(inc.id),
+                  key: Key(income.id ?? ""),
                   direction: DismissDirection.endToStart,
                   dismissThresholds: const {DismissDirection.endToStart: 0.5},
                   background: Container(
@@ -48,51 +93,38 @@ class IncomeTab extends ConsumerWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 20),
                     child: const Icon(Icons.delete, color: Colors.white),
                   ),
-                  onDismissed: (direction) {
-                    ref.read(incomeProvider.notifier).deleteIncome(inc);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('${inc.title} removed')),
+                  onDismissed: (direction) async {
+                    await deleteIncome(
+                      income: income,
                     );
                   },
-                  child: GestureDetector(
-                    onTap: () {
-                      showEditIncomeDialog(context, inc, ref);
-                    },
-                    child: Card(
-                      elevation: 1,
-                      margin: const EdgeInsets.all(8),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
+                  child: Card(
+                    elevation: 1,
+                    margin: const EdgeInsets.all(8),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    color: Colors.white,
+                    child: ListTile(
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 16),
+                      leading: const CircleAvatar(
+                        backgroundColor: primaryColor,
+                        child: Icon(Icons.attach_money, color: Colors.white),
                       ),
-                      color: Colors.white,
-                      child: ListTile(
-                        contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 16),
-                        leading: const CircleAvatar(
-                          backgroundColor: primaryColor,
-                          child: Icon(Icons.attach_money, color: Colors.white),
+                      title: Text(
+                        income.nameOfRevenue ?? "-",
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
-                        title: Text(
-                          inc.title,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        subtitle: Text(
-                          formatDate(inc.date),
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        trailing: Text(
-                          'GHS ${inc.amount.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: primaryColor,
-                          ),
+                      ),
+                      trailing: Text(
+                        'GHS ${income.amount?.toStringAsFixed(2)}',
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: primaryColor,
                         ),
                       ),
                     ),
